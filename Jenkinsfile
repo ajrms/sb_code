@@ -6,8 +6,8 @@ pipeline {
   }
 
   environment {
-    gitName = 'ajrms'
-    gitEmail = 'sun98415@gmail.com'
+    gitName = 'KSLeeDev'
+    gitEmail = 'lllllks25@naver.com'
     gitWebaddress = 'https://github.com/ajrms/sb_code.git'
     gitSshaddress = 'git@github.com:ajrms/sb_code.git'
     gitCredential = 'git_cre' // github credential 생성 시의 ID
@@ -74,6 +74,21 @@ pipeline {
             }
             success {
                 echo 'docker image push success'
+            }
+        }
+    }
+    stage('docker container deploy') {
+      steps {
+        sh 'docker rm -f sb'
+        sh "docker run -dp 5656:8085 --name sb ${dockerHubRegistry}:${currentBuild.number}"
+        // maven 플러그인이 미리 설치 되어있어야 함
+        }
+        post {
+            failure {
+                echo 'docker container deploy failure'
+            }
+            success {
+                echo 'docker container deploy success'
             }
         }
     }
