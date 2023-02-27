@@ -28,4 +28,4 @@ spec:
     spec:
       containers:
         - name: spring
-          image: ajrms/sbimage:latest
+          image: ajrms/sbimage:15
